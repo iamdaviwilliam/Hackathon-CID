@@ -1,7 +1,20 @@
-import pandas as pd
+# Install dependencies as needed:
+# pip install kagglehub[pandas-datasets]
+import kagglehub
+from kagglehub import KaggleDatasetAdapter
 
-df = pd.read_csv('data/postings.csv')
+# Set the path to the file you'd like to load
+file_path = ""
 
-print(df.columns)
+# Load the latest version
+df = kagglehub.load_dataset(
+  KaggleDatasetAdapter.PANDAS,
+  "arshkon/linkedin-job-postings",
+  file_path,
+  # Provide any additional arguments like 
+  # sql_query or pandas_kwargs. See the 
+  # documenation for more information:
+  # https://github.com/Kaggle/kagglehub/blob/main/README.md#kaggledatasetadapterpandas
+)
 
-df['texto_completo_vaga'] = df['title'] + " " + df['description'] + " " + df['skills_desc'] 
+print("First 5 records:", df.head())
